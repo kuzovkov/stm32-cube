@@ -1,0 +1,28 @@
+15:18:20 **** Build of configuration Debug for project test1 ****
+make -j28 all 
+arm-none-eabi-size  test1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4724	     12	   1572	   6308	   18a4	test1.elf
+Finished building: default.size.stdout
+ 
+15:19:18 **** Incremental Build of configuration Debug for project test1 ****
+make -j28 all 
+arm-none-eabi-size  test1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4724	     12	   1572	   6308	   18a4	test1.elf
+Finished building: default.size.stdout
+ 
+15:20:33 **** Incremental Build of configuration Debug for project test1 ****
+make -j28 all 
+arm-none-eabi-size  test1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4724	     12	   1572	   6308	   18a4	test1.elf
+Finished building: default.size.stdout
+ 
+15:20:50 **** Incremental Build of configuration Debug for project test1 ****
+make -j28 all 
+arm-none-eabi-size  test1.elf 
+   text	   data	    bss	    dec	    hex	filename
+   4724	     12	   1572	   6308	   18a4	test1.elf
+Finished building: default.size.stdout
+ 
