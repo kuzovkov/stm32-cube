@@ -518,3 +518,299 @@
 2025-08-15 18:12:05,832 [INFO] CADModel:165 - CPN selected for project levelSTM32F103C8T6
 2025-08-15 18:12:05,832 [INFO] CADModel:114 - Register for checkConnection events
 2025-08-15 18:12:05,875 [INFO] OpenFileManager:386 - Restore cursor
+2025-08-15 18:17:33,086 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:19:23,548 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:20:05,382 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:20:15,162 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 336560800 Bytes (450887680)
+2025-08-15 18:20:15,270 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 349082968 Bytes (450887680)
+2025-08-15 18:20:15,918 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 377642920 Bytes (450887680)
+2025-08-15 18:20:16,498 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:20:16,498 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:20:16,498 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:20:16,498 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:20:16,499 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:20:16,718 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:20:17,280 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:20:17,494 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:20:17,671 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:20:17,709 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:20:17,825 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:20:17,827 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:20:17,909 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:20:17,914 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:20:18,028 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:20:18,029 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:20:18,106 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:20:18,110 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:20:18,176 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:20:18,213 [INFO] ApiDbMcu:532 - Load IP Config File for RCC
+2025-08-15 18:20:18,217 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:20:18,314 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:20:18,323 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:20:18,542 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:20:19,224 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 256mS.
+2025-08-15 18:20:19,230 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:20:19,349 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:20:19,370 [INFO] ApiDbMcu:532 - Load IP Config File for FATFS
+2025-08-15 18:20:19,388 [INFO] ApiDbMcu:532 - Load IP Config File for FREERTOS
+2025-08-15 18:20:19,404 [INFO] ApiDbMcu:532 - Load IP Config File for USB_DEVICE
+2025-08-15 18:20:19,965 [INFO] LogOutputStream:77 - [STDOUT_REDIRECT] 
+2025-08-15 18:20:20,886 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 1655mS.
+2025-08-15 18:20:20,886 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:20:20,887 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:21:30,407 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:21:33,043 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:22:05,040 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:22:51,499 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:23:29,164 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:23:36,556 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:24:33,886 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:24:49,823 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 371816696 Bytes (566231040)
+2025-08-15 18:24:49,906 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 384517584 Bytes (566231040)
+2025-08-15 18:24:50,276 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 409725968 Bytes (566231040)
+2025-08-15 18:24:50,382 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:24:50,383 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:24:50,383 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:24:50,383 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:24:50,383 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:24:50,461 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:24:50,531 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:24:50,538 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:24:50,607 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:24:50,616 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:24:50,687 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:24:50,688 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:24:50,750 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:24:50,753 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:24:50,852 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:24:50,853 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:24:50,913 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:24:50,916 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:24:50,984 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:24:50,996 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:24:51,060 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:24:51,061 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:24:51,157 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:24:51,371 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 12mS.
+2025-08-15 18:24:51,372 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:24:51,466 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:24:52,155 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 783mS.
+2025-08-15 18:24:52,155 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:24:52,156 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:25:07,898 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:16,418 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:28,703 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:33,872 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:40,621 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:47,520 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:50,021 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:25:53,187 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:26:13,315 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:26:30,372 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 472750272 Bytes (571473920)
+2025-08-15 18:26:30,437 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 485555184 Bytes (571473920)
+2025-08-15 18:26:30,874 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 254319072 Bytes (571473920)
+2025-08-15 18:26:31,016 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:26:31,031 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:26:31,031 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:26:31,032 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:26:31,032 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:26:31,125 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:26:31,199 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:26:31,206 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:26:31,283 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:26:31,291 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:26:31,363 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:26:31,364 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:26:31,426 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:26:31,429 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:26:31,518 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:26:31,519 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:26:31,577 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:26:31,579 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:26:31,641 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:26:31,651 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:26:31,714 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:26:31,715 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:26:31,801 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:26:32,008 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 13mS.
+2025-08-15 18:26:32,009 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:26:32,100 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:26:32,676 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 667mS.
+2025-08-15 18:26:32,677 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:26:32,677 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:45:38,368 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:45:49,652 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 328553480 Bytes (586153984)
+2025-08-15 18:45:49,836 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 342848656 Bytes (586153984)
+2025-08-15 18:45:52,844 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 407523248 Bytes (586153984)
+2025-08-15 18:45:53,159 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:45:53,159 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:45:53,160 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:45:53,160 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:45:53,160 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:45:53,242 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:45:53,556 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:45:53,590 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:45:53,711 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:45:53,722 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:45:53,955 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:45:53,957 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:45:54,021 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:45:54,025 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:45:54,131 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:45:54,132 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:45:54,193 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:45:54,196 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:45:54,262 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:45:54,279 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:45:54,375 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:45:54,376 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:45:54,470 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:45:54,767 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 18mS.
+2025-08-15 18:45:54,769 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:45:54,882 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:45:55,711 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 942mS.
+2025-08-15 18:45:55,711 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:45:55,711 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:49:40,283 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:49:47,494 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:51:14,896 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 272137488 Bytes (586153984)
+2025-08-15 18:51:14,975 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 285167592 Bytes (586153984)
+2025-08-15 18:51:15,336 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 332879848 Bytes (586153984)
+2025-08-15 18:51:15,604 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:51:15,604 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:51:15,604 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:51:15,604 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:51:15,604 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:51:15,692 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:51:15,854 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:51:15,874 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:51:15,962 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:51:15,977 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:51:16,061 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:51:16,062 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:51:16,133 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:51:16,137 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:51:16,232 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:51:16,233 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:51:16,309 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:51:16,312 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:51:16,379 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:51:16,395 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:51:16,465 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:51:16,466 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:51:16,566 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:51:16,784 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 14mS.
+2025-08-15 18:51:16,786 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:51:16,881 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:51:17,560 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 774mS.
+2025-08-15 18:51:17,560 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:51:17,565 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:57:24,950 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:57:27,290 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:58:04,329 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 18:58:10,566 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 376168056 Bytes (586153984)
+2025-08-15 18:58:10,719 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 390764016 Bytes (586153984)
+2025-08-15 18:58:11,279 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 422242488 Bytes (586153984)
+2025-08-15 18:58:11,603 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 18:58:11,603 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 18:58:11,603 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 18:58:11,603 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 18:58:11,604 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 18:58:11,694 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 18:58:11,822 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 18:58:11,858 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 18:58:11,975 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 18:58:11,991 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 18:58:12,086 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 18:58:12,088 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 18:58:12,167 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 18:58:12,171 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 18:58:12,290 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 18:58:12,292 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 18:58:12,357 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 18:58:12,360 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 18:58:12,430 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 18:58:12,453 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 18:58:12,523 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 18:58:12,525 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 18:58:12,627 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 18:58:12,873 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 15mS.
+2025-08-15 18:58:12,875 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 18:58:12,975 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 18:58:13,697 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 822mS.
+2025-08-15 18:58:13,697 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 18:58:13,698 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 23:13:02,926 [ERROR] ConfigurationRetriever:142 - IOException on connection: Read timed out
+2025-08-15 23:22:34,810 [INFO] CADModel:198 - CPN selected (Project mode): STM32F103C8T6
+2025-08-15 23:22:34,814 [INFO] CADModel:200 - Internet connection configuration mode: 1
+2025-08-15 23:22:34,815 [INFO] CADModel:203 - rpn retrievedSTM32F103C8
+2025-08-15 23:22:34,907 [INFO] JxBrowserEngine:152 - Initiate JxBrowser Engine with user profile folder
+2025-08-15 23:22:49,816 [INFO] WebAppUi:336 - Instantiating new browser for Project
+2025-08-15 23:22:56,888 [INFO] WebAppUi:1235 - Register for checkConnection events
+2025-08-15 23:22:56,889 [INFO] WebAppUi:1270 - Apply proxy settings
+2025-08-15 23:22:56,889 [INFO] WebAppUi:1308 - Chromium requires no authentication
+2025-08-15 23:22:56,922 [INFO] WebAppUi:1294 - Direct internet connection detected
+2025-08-15 23:22:57,143 [INFO] WebAppUi:1166 - Web application path used /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659/db/plugins/mcufinder/reactClient/index.html
+2025-08-15 23:22:57,578 [INFO] WebAppUi:938 - Path where api_config.json is located /home/user1/.stmcufinder/plugins/mcufinder//mcu/api_config.json
+2025-08-15 23:22:57,578 [INFO] WebAppUi:939 - Setting api config in window object
+2025-08-15 23:22:57,668 [WARN] WebAppUi:976 - Cannot access cad_preferences.json
+2025-08-15 23:22:57,669 [WARN] WebAppUi:979 - Fallback to default consent
+2025-08-15 23:22:57,669 [INFO] WebAppUi:947 - Path where cad_preferences.json is located /home/user1/.stm32cubeide/
+2025-08-15 23:22:57,669 [INFO] WebAppUi:948 - Setting consent info in window object
+2025-08-15 23:22:59,236 [INFO] WebAppUi:843 - Allow Downloads
+2025-08-15 23:22:59,238 [INFO] WebAppUi:336 - Instantiating new browser for Finder
+2025-08-15 23:22:59,528 [INFO] WebAppUi:1235 - Register for checkConnection events
+2025-08-15 23:22:59,528 [INFO] WebAppUi:1270 - Apply proxy settings
+2025-08-15 23:22:59,529 [INFO] WebAppUi:1308 - Chromium requires no authentication
+2025-08-15 23:22:59,530 [INFO] WebAppUi:1294 - Direct internet connection detected
+2025-08-15 23:22:59,538 [INFO] WebAppUi:1166 - Web application path used /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659/db/plugins/mcufinder/reactClient/index.html
+2025-08-15 23:22:59,557 [INFO] WebAppUi:938 - Path where api_config.json is located /home/user1/.stmcufinder/plugins/mcufinder//mcu/api_config.json
+2025-08-15 23:22:59,558 [INFO] WebAppUi:939 - Setting api config in window object
+2025-08-15 23:22:59,587 [INFO] WebAppUi:947 - Path where cad_preferences.json is located /home/user1/.stm32cubeide/
+2025-08-15 23:22:59,587 [INFO] WebAppUi:948 - Setting consent info in window object
+2025-08-15 23:22:59,884 [INFO] WebAppUi:1100 - Web application message: SSO unavailable because of TypeError: Failed to fetch
+2025-08-15 23:22:59,885 [INFO] WebAppUi:1100 - Web application message: [UlApiManager component] Connected to Ultra Librarian API
+2025-08-15 23:23:02,031 [INFO] WebAppUi:843 - Allow Downloads
+2025-08-15 23:23:02,032 [INFO] WebAppUi:664 - RPN selected STM32F103C8
+2025-08-15 23:23:02,032 [INFO] WebAppUi:665 - RefName selected STM32F103C8Tx
+2025-08-15 23:23:02,033 [INFO] WebAppUi:666 - CPN selected STM32F103C8T6
+2025-08-15 23:23:02,040 [INFO] WebAppUi:829 - Which Bigleton in use 2 and which CPN is about STM32F103C8T6
+2025-08-15 23:23:02,075 [INFO] WebAppUi:703 - Have injected Javascript into web application
+2025-08-15 23:23:02,075 [INFO] WebAppUiContainer:153 - Web application run mode: Project CPN: STM32F103C8T6
+2025-08-15 23:23:02,130 [INFO] WebAppUi:1100 - Web application message: SSO unavailable because of TypeError: Failed to fetch
+2025-08-15 23:23:02,132 [INFO] WebAppUi:1100 - Web application message: [UlApiManager component] Connected to Ultra Librarian API
+2025-08-15 23:23:03,320 [INFO] WebAppUi:1100 - Web application message: No network connection
+2025-08-15 23:23:03,323 [INFO] WebAppUi:1100 - Web application message: Cannot get data because API not available
+2025-08-15 23:23:42,163 [INFO] Gpio:278 - dependency for GPIO [SYS]
+2025-08-15 23:26:15,054 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 322791888 Bytes (586153984)
+2025-08-15 23:26:15,130 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 335901136 Bytes (586153984)
+2025-08-15 23:26:15,536 [INFO] UtilMem:75 - End SaveConfig() Used Memory: 362375648 Bytes (586153984)
+2025-08-15 23:26:15,661 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: NVIC
+2025-08-15 23:26:15,661 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: SYS
+2025-08-15 23:26:15,661 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: GPIO
+2025-08-15 23:26:15,661 [INFO] BlockDiagram:2775 - set Specific Code input for plugin: RCC
+2025-08-15 23:26:15,662 [INFO] CodeGenerator:892 - code generatio: config db path: /opt/st/stm32cubeide_1.19.0_2/plugins/com.st.stm32cube.common.mx_6.15.0.202507011659//db/
+2025-08-15 23:26:15,752 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp_save
+2025-08-15 23:26:16,047 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/license.tmp
+2025-08-15 23:26:16,074 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp_save
+2025-08-15 23:26:16,213 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/gpio.tmp
+2025-08-15 23:26:16,229 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c_save
+2025-08-15 23:26:16,450 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_it.c
+2025-08-15 23:26:16,451 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h_save
+2025-08-15 23:26:16,519 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_it.h
+2025-08-15 23:26:16,523 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c_save
+2025-08-15 23:26:16,627 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/stm32f1xx_hal_msp.c
+2025-08-15 23:26:16,629 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp_save
+2025-08-15 23:26:16,689 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/MXTmpFiles/system.tmp
+2025-08-15 23:26:16,692 [INFO] CodeEngine:321 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h_save
+2025-08-15 23:26:16,755 [INFO] CodeEngine:345 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/stm32f1xx_hal_conf.h
+2025-08-15 23:26:16,777 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h_save
+2025-08-15 23:26:16,869 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Inc/main.h
+2025-08-15 23:26:16,870 [INFO] CodeEngine:265 - oldGeneratedFile, /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c_save
+2025-08-15 23:26:16,965 [INFO] CodeEngine:289 - Generated code: /home/user1/STM32CubeIDE/workspace_1.19.0/test1/Core/Src/main.c
+2025-08-15 23:26:17,186 [INFO] ProjectBuilder:3606 - Time for Copy HAL[1] : 17mS.
+2025-08-15 23:26:17,188 [INFO] ProjectBuilder:5216 - Project Generator version: 4.7.0-B52
+2025-08-15 23:26:17,286 [INFO] ConfigFileManager:1595 - The Die is : DIE410
+2025-08-15 23:26:18,007 [INFO] ProjectBuilder:5496 - Time for Generating toolchain IDE Files: 819mS.
+2025-08-15 23:26:18,007 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
+2025-08-15 23:26:18,007 [INFO] ProjectBuilder:3463 - Time for Copy CMSIS : 0mS.
