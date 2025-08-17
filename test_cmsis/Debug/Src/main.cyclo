@@ -1,0 +1,4 @@
+../Src/main.c:23:6:SetSysClockTo72	4
+../Src/main.c:52:6:PINA_0_INIT	1
+../Src/main.c:65:6:PINB_2_INIT	1
+../Src/main.c:79:5:main	2
