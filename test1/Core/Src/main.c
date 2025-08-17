@@ -106,8 +106,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	//pinState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0);
-	pinState = READ_BIT(GPIOA->IDR, GPIO_IDR_IDR0);
+	//мигание светодиодом на плате, при нажатии на кнопку мигают еще 2 yf PC13 и PB5
+	pinState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0); //работает так и так
+	//pinState = READ_BIT(GPIOA->IDR, GPIO_IDR_IDR0);
     if (pinState == GPIO_PIN_SET){
 		buttonState = 1;
 	} else {
