@@ -1,0 +1,10 @@
+/home/user1/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Core/Include/core_cm3.h:1511:22:__NVIC_EnableIRQ	16	static
+/home/user1/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Core/Include/core_cm3.h:1639:22:__NVIC_SetPriority	16	static
+../Src/main.c:27:6:SetSysClockTo72	4	static
+../Src/main.c:58:6:PINB_2_INIT	4	static
+../Src/main.c:71:6:PINC_13_INIT	4	static
+../Src/main.c:80:6:UART1_Config	4	static
+../Src/main.c:101:6:DMA_Init	4	static
+../Src/main.c:118:6:DMA_Config	24	static
+../Src/main.c:135:6:DMA1_Channel5_IRQHandler	8	static
+../Src/main.c:168:5:main	16	static

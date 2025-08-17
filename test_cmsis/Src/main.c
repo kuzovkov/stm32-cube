@@ -1,10 +1,10 @@
 
 /**
- * Add Include DIRS (Project->Properties->MCU/MPU GCC Compiler->Include Paths):
+ * Add Include DIRS (Project->Properties->MCU/MPU GCC Compiler->Include paths):
  * - /home/user1/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Core/Include
  * - /home/user1/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/CMSIS/Device/ST/STM32F1xx/Include
  * - /home/user1/STM32Cube/Repository/STM32Cube_FW_F1_V1.8.6/Drivers/STM32F1xx_HAL_Driver/Inc
- * And add in top of file definition of your device? f.x.:
+ * And add in top of file definition of your device, f.x.:
  *  #define STM32F103xB
  */
 #define STM32F103xB
