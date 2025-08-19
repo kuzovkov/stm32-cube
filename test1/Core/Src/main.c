@@ -49,7 +49,7 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-
+uint8_t cnt = 0;
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -107,7 +107,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 	//мигание светодиодом на плате, при нажатии на кнопку мигают еще 2 yf PC13 и PB5
-	pinState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0); //работает так и так
+	pinState = HAL_GPIO_ReadPin(GPIOA, GPIO_PIN_0); // так и так
 	//pinState = READ_BIT(GPIOA->IDR, GPIO_IDR_IDR0);
     if (pinState == GPIO_PIN_SET){
 		buttonState = 1;
@@ -124,6 +124,7 @@ int main(void)
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 	HAL_Delay(delay);
+	cnt++;
 
   }
   /* USER CODE END 3 */
