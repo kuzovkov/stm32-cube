@@ -1,5 +1,47 @@
 /* USER CODE BEGIN Header */
 /**
+Для организации передачи данных можно использовать прерывание «transmit data register empty».
+ Оно вызывается каждый раз, когда регистр UART готов принять данные для передачи. Для его
+  использования необходимо добавить/обновить код в трех файлах main.h, main.c, stm32f1xx_it.c
+
+
+Передача данных по прерываниям в приведенной выше программе сводится к следующими шагам:
+1. В основном потоке:
+1) подготовить буфер с данными для передачи (функция output_
+	buf_send_str):
+	// copy buffer
+	memcpy((void*) output_buf->buf, str, str_len);
+	output_buf->start = 0;
+	output_buf->end = str_len;
+2) запустить прерывание:
+	// enable interrupts
+	__HAL_UART_ENABLE_IT(output_buf->huart, UART_IT_TXE);
+	2. В обработчике прерывания (функции USART2_IRQHandler,
+	output_buf_process_txe_it):
+	1) проверить, что произошло прерывание «transmit data register
+	empty». Это необходимо сделать, так как обработчик прерываний USART2_IRQHandler
+	обслуживает все события, связанные с USART2:
+	// ignore interruption if it isn’t related with data transmission
+	if (!__HAL_UART_GET_FLAG(output_buf->huart, UART_
+		FLAG_TXE)) {
+		return 0;
+	}
+2) если данных для передачи нет, необходимо выключить прерывание, иначе перейти к следующему шагу:
+	if (output_buf->start == output_buf->end) {
+		// all data has been transmitted. Stop interruptions
+		__HAL_UART_DISABLE_IT(output_buf->huart, UART_IT_
+		TXE);
+		return 0;
+	}
+3) перенести очередной байт из буфера в регистр UART для передачи данных:
+	// move data from buffer to register
+	output_buf->huart->Instance->TDR
+	>buf[output_buf->start];
+	output_buf->start++;
+
+
+ */
+/**
   ******************************************************************************
   * @file           : main.c
   * @brief          : Main program body
