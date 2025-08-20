@@ -1,44 +1,62 @@
 /* USER CODE BEGIN Header */
 /**
-Для организации передачи данных можно использовать прерывание «transmit data register empty».
- Оно вызывается каждый раз, когда регистр UART готов принять данные для передачи. Для его
-  использования необходимо добавить/обновить код в трех файлах main.h, main.c, stm32f1xx_it.c
+ * Прием данных
+Для организации передачи данных можно использовать прерывание
+ «Receive data register not empty (data ready to be read)». Оно
+вызывается каждый раз, когда на UART поступают данные. Для его
+использования необходимо добавить/обновить код в трех файлах main.h, main.c, stm32f1xx_it.c
 
+Прием данных по прерываниям в приведенной программе сводится к следующими шагам:
+1. В основной программе на этапе инициализации:
+	1) подготовка буфера:
+	memset((void*) input_buf->buf, 0, INPUT_BUF_SIZE);
+	input_buf->pos = 0;
+	input_buf->huart = huart;
 
-Передача данных по прерываниям в приведенной выше программе сводится к следующими шагам:
-1. В основном потоке:
-1) подготовить буфер с данными для передачи (функция output_
-	buf_send_str):
-	// copy buffer
-	memcpy((void*) output_buf->buf, str, str_len);
-	output_buf->start = 0;
-	output_buf->end = str_len;
-2) запустить прерывание:
-	// enable interrupts
-	__HAL_UART_ENABLE_IT(output_buf->huart, UART_IT_TXE);
-	2. В обработчике прерывания (функции USART2_IRQHandler,
-	output_buf_process_txe_it):
-	1) проверить, что произошло прерывание «transmit data register
-	empty». Это необходимо сделать, так как обработчик прерываний USART2_IRQHandler
+2) включение «receive data register not empty» прерывания:
+	// enable interrupt
+__	HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+	2. В основной программе (вечный цикл):
+	чтение буфера принятых байт и его обработка:
+	buf);
+	// read input buffer content
+	size = input_buf_read_content(&project_input_buf,
+	// prepare content for “echo”
+	strcpy(output_buf, “input buf: \””);
+	offset = strlen(output_buf);
+	for (int i = 0; i < size; i++) {
+		sym = buf[i];
+		// replace non printable symbols except spaces with dash
+		if (!(sym == ‘ ‘ || isgraph(sym))) {
+			sym = ‘-’;
+		}
+		output_buf[offset + i] = sym;
+	}
+	offset += size;
+	strcpy(output_buf + offset, “\”\n”);
+	// show echo
+	HAL_UART_Transmit(&huart2, (uint8_t*) output_buf, strlen(output_buf), HAL_MAX_DELAY);
+
+3. В обработчике прерывания (функции USART2_IRQHandler, input_buf_process_rxne_it):
+	1) проверка того, что произошло прерывание «receive data register
+	not empty». Это необходимо сделать, так как обработчик прерываний USART2_IRQHandler
 	обслуживает все события, связанные с USART2:
-	// ignore interruption if it isn’t related with data transmission
-	if (!__HAL_UART_GET_FLAG(output_buf->huart, UART_FLAG_TXE)) {
+	// ignore interrupt if it isn’t related with received
+	data
+	if (!__HAL_UART_GET_FLAG(input_buf->huart, UART_FLAG_RXNE)) {
 		return 0;
 	}
-2) если данных для передачи нет, необходимо выключить прерывание, иначе перейти к следующему шагу:
-	if (output_buf->start == output_buf->end) {
-		// all data has been transmitted. Stop interruptions
-		__HAL_UART_DISABLE_IT(output_buf->huart, UART_IT_
-		TXE);
-		return 0;
+2) считывание байта из регистра UART и сохранение его в буфере:
+	// read received data
+	char sym = input_buf->huart->Instance->DR;
+	// save symbol into buffer
+	size_t pos = input_buf->pos;
+	input_buf->buf[pos] = sym;
+	pos++;
+	if (pos >= INPUT_BUF_SIZE) {
+		pos = 0;
 	}
-3) перенести очередной байт из буфера в регистр UART для передачи данных:
-	// move data from buffer to register
-	output_buf->huart->Instance->TDR
-	>buf[output_buf->start];
-	output_buf->start++;
-
-
+	input_buf->pos = pos;
  */
 /**
   ******************************************************************************
@@ -64,7 +82,7 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
 #include <string.h>
-
+#include <ctype.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -100,56 +118,55 @@ static void MX_USART1_UART_Init(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 // define global variable
-output_buf_t project_output_buf;
+input_buf_t project_input_buf;
 /**
-* Initialize output_buf_t object.
+* Initialize input_line_buf_t object.
 */
-int output_buf_init(output_buf_t *output_buf, UART_HandleTypeDef *huart)
+int input_buf_init(input_buf_t *input_buf, UART_HandleTypeDef *huart)
 {
-	output_buf->start = 0;
-	output_buf->end = 0;
-	output_buf->huart = huart;
+	memset((void*) input_buf->buf, 0, INPUT_BUF_SIZE);
+	input_buf->pos = 0;
+	input_buf->huart = huart;
+	// enable interrupt
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
 	return 0;
 }
-
 /**
-* Send data to UART;
+* Read current content of the buffer.
 */
-int output_buf_send_str(output_buf_t *output_buf, const char *str) {
-	if (output_buf->start != output_buf->end) {
-		// Error: previous transmission isn't completed
-		return -1;
+int input_buf_read_content(input_buf_t *input_buf, char *output)
+{
+	int pos = input_buf->pos;
+	// copy data to `output` buffer
+	for (int i = 0; i < INPUT_BUF_SIZE; i++) {
+		output[i] = input_buf->buf[pos];
+		pos++;
+		if (pos >= INPUT_BUF_SIZE) {
+			pos = 0;
+		}
 	}
-	size_t str_len = strlen(str);
-	if (str_len > sizeof(output_buf->buf)) {
-		// Error: str is too long for internal buffer
-		return -2;
-	}
-	// copy buffer
-	memcpy((void*) output_buf->buf, str, str_len);
-	output_buf->start = 0;
-	output_buf->end = str_len;
-	// enable interrupts
-	__HAL_UART_ENABLE_IT(output_buf->huart, UART_IT_TXE);
-	return 0;
+	return INPUT_BUF_SIZE;
 }
 
 /**
 * Process UART interruption.
 */
-int output_buf_process_txe_it(output_buf_t *output_buf) {
-	// ignore interruption if it isn't related with data transmission
-	if (!__HAL_UART_GET_FLAG(output_buf->huart, UART_FLAG_TXE)) {
+int input_buf_process_rxne_it(input_buf_t *input_buf)
+{
+// ignore interrupt if it isn't related with received data
+	if (!__HAL_UART_GET_FLAG(input_buf->huart, UART_FLAG_RXNE)) {
 		return 0;
 	}
-	if (output_buf->start == output_buf->end) {
-		// all data has been transmitted. Stop interruptions
-		__HAL_UART_DISABLE_IT(output_buf->huart, UART_IT_TXE);
-		return 0;
+	// process received data
+	char sym = input_buf->huart->Instance->DR;
+	// save symbol into buffer
+	size_t pos = input_buf->pos;
+	input_buf->buf[pos] = sym;
+	pos++;
+	if (pos >= INPUT_BUF_SIZE) {
+		pos = 0;
 	}
-	// move data from buffer to register
-	output_buf->huart->Instance->DR = output_buf->buf[output_buf->start];
-	output_buf->start++;
+	input_buf->pos = pos;
 	return 0;
 }
 /* USER CODE END 0 */
@@ -185,20 +202,37 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  output_buf_init(&project_output_buf, &huart1);
-  char buf[128];
-  int current_time;
+  input_buf_init(&project_input_buf, &huart1);
+  char buf[INPUT_BUF_SIZE + 1];
+  char output_buf[INPUT_BUF_SIZE + 32];
+  int size;
+  int offset;
+  char sym;
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  current_time = HAL_GetTick();
-	  sprintf(buf, "Time: %i\n", current_time);
-	  output_buf_send_str(&project_output_buf, buf);
+	  // read input buffer content
+	  size = input_buf_read_content(&project_input_buf, buf);
+	  // prepare content for "echo"
+	  strcpy(output_buf, "input buf: \"");
+	  offset = strlen(output_buf);
+	  for (int i = 0; i < size; i++) {
+		  sym = buf[i];
+		  // replace non printable symbols except spaces with dash
+		  if (!(sym == ' ' || isgraph(sym))) {
+			  sym = '-';
+		  }
+		  output_buf[offset + i] = sym;
+	  }
+	  offset += size;
+	  strcpy(output_buf + offset, "\"\n");
+	  // show echo
+	  HAL_UART_Transmit(&huart1, (uint8_t*) output_buf,  strlen(output_buf), HAL_MAX_DELAY);
 	  HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_2);
-	  HAL_Delay(500);
+	  HAL_Delay(1000);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

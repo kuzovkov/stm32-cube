@@ -1,0 +1,8 @@
+../Core/Src/main.c:73:5:input_buf_init	16	static
+../Core/Src/main.c:85:5:input_buf_read_content	24	static
+../Core/Src/main.c:102:5:input_buf_process_rxne_it	24	static
+../Core/Src/main.c:126:5:main	136	static
+../Core/Src/main.c:195:6:SystemClock_Config	72	static
+../Core/Src/main.c:232:13:MX_USART1_UART_Init	8	static
+../Core/Src/main.c:265:13:MX_GPIO_Init	32	static
+../Core/Src/main.c:299:6:Error_Handler	4	static,ignoring_inline_asm

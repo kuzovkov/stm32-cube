@@ -1,0 +1,8 @@
+../Core/Src/main.c:73:5:input_buf_init	1
+../Core/Src/main.c:85:5:input_buf_read_content	3
+../Core/Src/main.c:102:5:input_buf_process_rxne_it	3
+../Core/Src/main.c:126:5:main	4
+../Core/Src/main.c:195:6:SystemClock_Config	3
+../Core/Src/main.c:232:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:265:13:MX_GPIO_Init	1
+../Core/Src/main.c:299:6:Error_Handler	1
