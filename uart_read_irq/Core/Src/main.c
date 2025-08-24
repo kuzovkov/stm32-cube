@@ -15,7 +15,7 @@
 
 2) включение «receive data register not empty» прерывания:
 	// enable interrupt
-__	HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+    __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
 	2. В основной программе (вечный цикл):
 	чтение буфера принятых байт и его обработка:
 	buf);
@@ -104,7 +104,24 @@ __	HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
 UART_HandleTypeDef huart1;
 
 /* USER CODE BEGIN PV */
+#ifndef __GNUC__
+#error Unknown compilator
+#else
+#include <unistd.h>
 
+int _write(int fd, const void *buf, size_t count)
+{
+	int res = 0;
+	if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
+		// write data to UART
+		HAL_StatusTypeDef hal_res = HAL_UART_Transmit(&huart1, (uint8_t*) buf, count, HAL_MAX_DELAY);
+		res = hal_res == HAL_OK ? count : -1;
+	} else {
+		res = -1;
+	}
+	return res;
+}
+#endif
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -153,6 +170,7 @@ int input_buf_read_content(input_buf_t *input_buf, char *output)
 */
 int input_buf_process_rxne_it(input_buf_t *input_buf)
 {
+	//printf("\ninput_buf->pos: %d\n", input_buf->pos);
 // ignore interrupt if it isn't related with received data
 	if (!__HAL_UART_GET_FLAG(input_buf->huart, UART_FLAG_RXNE)) {
 		return 0;

@@ -1,0 +1,14 @@
+../Core/Src/main.c:53:5:_write	4
+../Core/Src/main.c:90:5:input_buf_init	1
+../Core/Src/main.c:102:5:input_buf_read_content	3
+../Core/Src/main.c:116:6:input_buffer_clear	1
+../Core/Src/main.c:125:5:input_buf_process_rxne_it	3
+../Core/Src/main.c:148:5:output_buf_init	1
+../Core/Src/main.c:160:5:output_buf_send_str	3
+../Core/Src/main.c:182:5:output_buf_process_txe_it	3
+../Core/Src/main.c:198:5:process_command	12
+../Core/Src/main.c:259:5:main	5
+../Core/Src/main.c:324:6:SystemClock_Config	3
+../Core/Src/main.c:361:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:394:13:MX_GPIO_Init	1
+../Core/Src/main.c:440:6:Error_Handler	1
