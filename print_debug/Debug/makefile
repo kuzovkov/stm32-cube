@@ -61,7 +61,7 @@ main-build: print_debug.elf secondary-outputs
 
 # Tool invocations
 print_debug.elf print_debug.map: $(OBJS) $(USER_OBJS) /home/user1/STM32CubeIDE/workspace_1.19.0/print_debug/STM32F103C8TX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "print_debug.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/user1/STM32CubeIDE/workspace_1.19.0/print_debug/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="print_debug.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "print_debug.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/home/user1/STM32CubeIDE/workspace_1.19.0/print_debug/STM32F103C8TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="print_debug.map" -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

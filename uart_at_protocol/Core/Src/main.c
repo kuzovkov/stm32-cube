@@ -248,7 +248,7 @@ int process_command(const char *cmd)
 			return -1;
 		}
 	}
-	return -1;
+	return -2;
 }
 /* USER CODE END 0 */
 
@@ -303,6 +303,9 @@ int main(void)
 		  if (status == 0){
 			  sprintf(output_buf, "\nOK");
 			  while(output_buf_send_str(&project_output_buf, output_buf) != 0 ){};
+		  } else if (status == -2){
+			  sprintf(output_buf, "\nUNKNOWN COMMAND: `%s`", input_buf);
+			  while(output_buf_send_str(&project_output_buf, output_buf) != 0){};
 		  } else {
 			  sprintf(output_buf, "\nERROR");
 			  while(output_buf_send_str(&project_output_buf, output_buf) != 0){};

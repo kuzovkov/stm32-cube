@@ -1,0 +1,17 @@
+../Core/Src/main.c:83:5:input_buf_init	1
+../Core/Src/main.c:95:5:input_buf_read_content	3
+../Core/Src/main.c:109:6:input_buffer_clear	1
+../Core/Src/main.c:118:5:output_buf_init	1
+../Core/Src/main.c:128:24:advance_index	1
+../Core/Src/main.c:133:13:uart_tx_start_if_needed	3
+../Core/Src/main.c:144:13:uart_write_bytes	3
+../Core/Src/main.c:158:13:uart_write_str	1
+../Core/Src/main.c:164:13:uart_write_line	1
+../Core/Src/main.c:171:5:process_command	13
+../Core/Src/main.c:228:6:HAL_UART_RxCpltCallback	8
+../Core/Src/main.c:262:6:HAL_UART_TxCpltCallback	3
+../Core/Src/main.c:285:5:main	1
+../Core/Src/main.c:340:6:SystemClock_Config	3
+../Core/Src/main.c:377:13:MX_USART1_UART_Init	2
+../Core/Src/main.c:410:13:MX_GPIO_Init	1
+../Core/Src/main.c:456:6:Error_Handler	1
