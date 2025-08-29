@@ -70,8 +70,8 @@ Pulse: 500.
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim2;
 TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
 
@@ -80,8 +80,8 @@ TIM_HandleTypeDef htim3;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
-static void MX_TIM2_Init(void);
 static void MX_TIM3_Init(void);
+static void MX_TIM4_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -120,12 +120,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_TIM2_Init();
   MX_TIM3_Init();
+  MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
   // local variable with pointer to timer struct
   TIM_HandleTypeDef *tim3 = &htim3;
-  TIM_HandleTypeDef *tim2 = &htim2;
+  TIM_HandleTypeDef *tim4 = &htim4;
   // timer channel
   uint32_t tim_led_channel2 = TIM_CHANNEL_2;
   uint32_t tim_led_channel1 = TIM_CHANNEL_1;
@@ -137,12 +137,12 @@ int main(void)
   uint32_t cc_value;
   // reset CCR register
   __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, 0);
-  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, 0);
-  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, 0);
+  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, 0);
+  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, 0);
   // run timer
   HAL_TIM_PWM_Start(tim3, tim_led_channel2);
-  HAL_TIM_PWM_Start(tim3, tim_led_channel1);
-  HAL_TIM_PWM_Start(tim2, tim_led_channel2);
+  HAL_TIM_PWM_Start(tim4, tim_led_channel1);
+  HAL_TIM_PWM_Start(tim4, tim_led_channel2);
   // calculate timer tick frequency: f_tick = f_sysclcock
   // f_tick = f_sysclcock / (CDK * (PSK + 1));
   tim_led_cnt_tick_freq = SystemCoreClock;
@@ -170,10 +170,11 @@ int main(void)
 	  __HAL_TIM_SET_AUTORELOAD(tim3, arr_value);
 	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, cc_value);
 
-	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, cc_value);
 
-	  __HAL_TIM_SET_AUTORELOAD(tim2, arr_value);
-	  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, cc_value);
+
+	  __HAL_TIM_SET_AUTORELOAD(tim4, arr_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, cc_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, cc_value);
 	  HAL_Delay(2000);
 	  // PWM signal
 	  // frequency: 1000 Hz
@@ -183,9 +184,9 @@ int main(void)
 	  __HAL_TIM_SET_AUTORELOAD(tim3, arr_value);
 	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, cc_value);
 
-	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, cc_value);
-	  __HAL_TIM_SET_AUTORELOAD(tim2, arr_value);
-	  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, cc_value);
+	  __HAL_TIM_SET_AUTORELOAD(tim4, arr_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, cc_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, cc_value);
 
 
 	  HAL_Delay(2000);
@@ -196,10 +197,9 @@ int main(void)
 	  cc_value = (arr_value + 1) * 0.2f;
 	  __HAL_TIM_SET_AUTORELOAD(tim3, arr_value);
 	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, cc_value);
-	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, cc_value);
-	  __HAL_TIM_SET_AUTORELOAD(tim2, arr_value);
-	  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, cc_value);
-
+	  __HAL_TIM_SET_AUTORELOAD(tim4, arr_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, cc_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, cc_value);
 	  HAL_Delay(2000);
 	  // PWM signal
 	  // frequency: 2000 Hz
@@ -208,18 +208,18 @@ int main(void)
 	  cc_value = (arr_value + 1) * 0.8f;
 	  __HAL_TIM_SET_AUTORELOAD(tim3, arr_value);
 	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, cc_value);
-	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, cc_value);
-	  __HAL_TIM_SET_AUTORELOAD(tim2, arr_value);
-	  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, cc_value);
+	  __HAL_TIM_SET_AUTORELOAD(tim4, arr_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, cc_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, cc_value);
 	  HAL_Delay(2000);
 	  // PWN signal with 1.0 duty cycle (i.e. output is always 1)
 	  arr_value = 999;
 	  cc_value = 1000;
 	  __HAL_TIM_SET_AUTORELOAD(tim3, arr_value);
 	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel2, cc_value);
-	  __HAL_TIM_SET_COMPARE(tim3, tim_led_channel1, cc_value);
-	  __HAL_TIM_SET_AUTORELOAD(tim2, arr_value);
-	  __HAL_TIM_SET_COMPARE(tim2, tim_led_channel2, cc_value);
+	  __HAL_TIM_SET_AUTORELOAD(tim4, arr_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel1, cc_value);
+	  __HAL_TIM_SET_COMPARE(tim4, tim_led_channel2, cc_value);
 	  HAL_Delay(2000);
     /* USER CODE END WHILE */
 
@@ -265,55 +265,6 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief TIM2 Initialization Function
-  * @param None
-  * @retval None
-  */
-static void MX_TIM2_Init(void)
-{
-
-  /* USER CODE BEGIN TIM2_Init 0 */
-
-  /* USER CODE END TIM2_Init 0 */
-
-  TIM_MasterConfigTypeDef sMasterConfig = {0};
-  TIM_OC_InitTypeDef sConfigOC = {0};
-
-  /* USER CODE BEGIN TIM2_Init 1 */
-
-  /* USER CODE END TIM2_Init 1 */
-  htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 5;
-  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim2.Init.Period = 999;
-  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
-  if (HAL_TIM_PWM_Init(&htim2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 200;
-  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim2, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
-  {
-    Error_Handler();
-  }
-  /* USER CODE BEGIN TIM2_Init 2 */
-
-  /* USER CODE END TIM2_Init 2 */
-  HAL_TIM_MspPostInit(&htim2);
-
-}
-
-/**
   * @brief TIM3 Initialization Function
   * @param None
   * @retval None
@@ -351,10 +302,6 @@ static void MX_TIM3_Init(void)
   sConfigOC.Pulse = 200;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-  if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
-  {
-    Error_Handler();
-  }
   if (HAL_TIM_PWM_ConfigChannel(&htim3, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
   {
     Error_Handler();
@@ -363,6 +310,59 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 2 */
   HAL_TIM_MspPostInit(&htim3);
+
+}
+
+/**
+  * @brief TIM4 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM4_Init(void)
+{
+
+  /* USER CODE BEGIN TIM4_Init 0 */
+
+  /* USER CODE END TIM4_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_OC_InitTypeDef sConfigOC = {0};
+
+  /* USER CODE BEGIN TIM4_Init 1 */
+
+  /* USER CODE END TIM4_Init 1 */
+  htim4.Instance = TIM4;
+  htim4.Init.Prescaler = 5;
+  htim4.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim4.Init.Period = 999;
+  htim4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim4.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_PWM_Init(&htim4) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim4, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+  sConfigOC.Pulse = 200;
+  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM4_Init 2 */
+
+  /* USER CODE END TIM4_Init 2 */
+  HAL_TIM_MspPostInit(&htim4);
 
 }
 
