@@ -1,0 +1,470 @@
+/* USER CODE BEGIN Header */
+/**
+  ******************************************************************************
+  * @file           : main.c
+  * @brief          : Main program body
+  ******************************************************************************
+  * @attention
+  *
+  * Copyright (c) 2025 STMicroelectronics.
+  * All rights reserved.
+  *
+  * This software is licensed under terms that can be found in the LICENSE file
+  * in the root directory of this software component.
+  * If no LICENSE file comes with this software, it is provided AS-IS.
+  *
+  ******************************************************************************
+  */
+/* USER CODE END Header */
+/* Includes ------------------------------------------------------------------*/
+#include "main.h"
+
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+/* USER CODE END Includes */
+
+/* Private typedef -----------------------------------------------------------*/
+/* USER CODE BEGIN PTD */
+
+/* USER CODE END PTD */
+
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+
+/* USER CODE END PD */
+
+/* Private macro -------------------------------------------------------------*/
+/* USER CODE BEGIN PM */
+
+/* USER CODE END PM */
+
+/* Private variables ---------------------------------------------------------*/
+UART_HandleTypeDef huart1;
+
+/* USER CODE BEGIN PV */
+#ifndef __GNUC__
+#error Unknown compilator
+#else
+#include <unistd.h>
+
+int _write(int fd, const void *buf, size_t count)
+{
+	int res = 0;
+	if (fd == STDOUT_FILENO || fd == STDERR_FILENO) {
+		// write data to UART
+		HAL_StatusTypeDef hal_res = HAL_UART_Transmit(&huart1, (uint8_t*) buf, count, HAL_MAX_DELAY);
+		res = hal_res == HAL_OK ? count : -1;
+	} else {
+		res = -1;
+	}
+	return res;
+}
+#endif
+/* USER CODE END PV */
+
+/* Private function prototypes -----------------------------------------------*/
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART1_UART_Init(void);
+/* USER CODE BEGIN PFP */
+
+/* USER CODE END PFP */
+
+/* Private user code ---------------------------------------------------------*/
+/* USER CODE BEGIN 0 */
+// define global variable
+input_buf_t project_input_buf;
+output_buf_t project_output_buf;
+int current_time;
+char input_buf[INPUT_BUF_SIZE + 1];
+char output_buf[OUTPUT_BUF_ZIZE + 1];
+int size;
+int status;
+int len;
+/**
+* Initialize input_line_buf_t object.
+*/
+int input_buf_init(input_buf_t *input_buf, UART_HandleTypeDef *huart)
+{
+	memset((void*) input_buf->buf, 0, INPUT_BUF_SIZE);
+	input_buf->pos = 0;
+	input_buf->huart = huart;
+	// enable interrupt
+	__HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE);
+	return 0;
+}
+/**
+* Read current content of the buffer.
+*/
+int input_buf_read_content(input_buf_t *input_buf, char *output)
+{
+	int pos = 0;
+	// copy data to `output` buffer
+	for (int i = 0; i < INPUT_BUF_SIZE; i++) {
+		output[i] = input_buf->buf[pos];
+		pos++;
+		if (pos >= INPUT_BUF_SIZE) {
+			pos = 0;
+		}
+	}
+	return INPUT_BUF_SIZE;
+}
+
+void input_buffer_clear(input_buf_t *input_buf)
+{
+	memset((void*) input_buf->buf, 0, INPUT_BUF_SIZE);
+	input_buf->pos = 0;
+}
+
+/**
+* Process UART interruption.
+*/
+int input_buf_process_rxne_it(input_buf_t *input_buf)
+{
+// ignore interrupt if it isn't related with received data
+	if (!__HAL_UART_GET_FLAG(input_buf->huart, UART_FLAG_RXNE)) {
+		return 0;
+	}
+	// process received data
+	char sym = input_buf->huart->Instance->DR;
+	// save symbol into buffer
+	size_t pos = input_buf->pos;
+	input_buf->buf[pos] = sym;
+	pos++;
+	if (pos >= INPUT_BUF_SIZE) {
+		pos = 0;
+	}
+	input_buf->pos = pos;
+
+
+
+	return 0;
+}
+
+
+/**
+* Initialize output_buf_t object.
+*/
+int output_buf_init(output_buf_t *output_buf, UART_HandleTypeDef *huart)
+{
+	memset((void*) output_buf->buf, 0, OUTPUT_BUF_ZIZE);
+	output_buf->start = 0;
+	output_buf->end = 0;
+	output_buf->huart = huart;
+	return 0;
+}
+
+/**
+* Send data to UART;
+*/
+int output_buf_send_str(output_buf_t *output_buf, const char *str) {
+	if (output_buf->start != output_buf->end) {
+		// Error: previous transmission isn't completed
+		return -1;
+	}
+	size_t str_len = strlen(str);
+	if (str_len > sizeof(output_buf->buf)) {
+		// Error: str is too long for internal buffer
+		return -2;
+	}
+	// copy buffer
+	memcpy((void*) output_buf->buf, str, str_len);
+	output_buf->start = 0;
+	output_buf->end = str_len;
+	// enable interrupts
+	__HAL_UART_ENABLE_IT(output_buf->huart, UART_IT_TXE);
+	return 0;
+}
+
+/**
+* Process UART interruption.
+*/
+int output_buf_process_txe_it(output_buf_t *output_buf) {
+	// ignore interruption if it isn't related with data transmission
+	if (!__HAL_UART_GET_FLAG(output_buf->huart, UART_FLAG_TXE)) {
+		return 0;
+	}
+	if (output_buf->start == output_buf->end) {
+		// all data has been transmitted. Stop interruptions
+		__HAL_UART_DISABLE_IT(output_buf->huart, UART_IT_TXE);
+		return 0;
+	}
+	// move data from buffer to register
+	output_buf->huart->Instance->DR = output_buf->buf[output_buf->start];
+	output_buf->start++;
+	return 0;
+}
+
+int process_command(const char *cmd)
+{
+	char buf[128];
+	int n = 0;
+	int cmd_len = strlen(cmd);
+	sscanf(cmd, "AT+MODE=%*d%n", &n);
+	if (n == cmd_len) {
+		int i1;
+		sscanf(cmd, "AT+MODE=%d", &i1);
+		if (i1 == 1){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
+			return 0;
+		} else if (i1 == 0){
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+	sscanf(cmd, "AT+MODE?%n", &n);
+	if (n == cmd_len) {
+		GPIO_PinState pin_state = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
+		sprintf(buf, "+MODE:%d", pin_state);
+		while(output_buf_send_str(&project_output_buf, buf) != 0){};
+		return 0;
+	}
+	sscanf(cmd, "AT+TIME%n", &n);
+	if (n == cmd_len) {
+		int time = HAL_GetTick();
+		sprintf(buf, "+TIME:%i", time);
+		while(output_buf_send_str(&project_output_buf, buf) != 0){};
+		return 0;
+	}
+	sscanf(cmd, "AT+BLINK=%*d%n", &n);
+	if (n == cmd_len) {
+		int count;
+		sscanf(cmd, "AT+BLINK=%d", &count);
+		if (count > 0 && count < 11){
+			GPIO_PinState pin_state = HAL_GPIO_ReadPin(GPIOB, GPIO_PIN_2);
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+			HAL_Delay(100);
+			for (int i = 0; i < count; i++ ){
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_SET);
+				HAL_Delay(200);
+				HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+				HAL_Delay(200);
+			}
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, pin_state);
+			return 0;
+		} else {
+			return -1;
+		}
+	}
+	return -2;
+}
+/* USER CODE END 0 */
+
+/**
+  * @brief  The application entry point.
+  * @retval int
+  */
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+
+  /* USER CODE END 1 */
+
+  /* MCU Configuration--------------------------------------------------------*/
+
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
+
+  /* USER CODE BEGIN Init */
+
+  /* USER CODE END Init */
+
+  /* Configure the system clock */
+  SystemClock_Config();
+
+  /* USER CODE BEGIN SysInit */
+
+  /* USER CODE END SysInit */
+
+  /* Initialize all configured peripherals */
+  MX_GPIO_Init();
+  MX_USART1_UART_Init();
+  /* USER CODE BEGIN 2 */
+  input_buf_init(&project_input_buf, &huart1);
+  output_buf_init(&project_output_buf, &huart1);
+
+
+  /* USER CODE END 2 */
+
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+	  // read input buffer content
+	  size = input_buf_read_content(&project_input_buf, input_buf);
+	  len = strlen(input_buf);
+	  if (len){
+		  input_buffer_clear(&project_input_buf);
+		  status = process_command(input_buf);
+		  if (status == 0){
+			  sprintf(output_buf, "\nOK");
+			  while(output_buf_send_str(&project_output_buf, output_buf) != 0 ){};
+		  } else if (status == -2){
+			  sprintf(output_buf, "\nUNKNOWN COMMAND: `%s`", input_buf);
+			  while(output_buf_send_str(&project_output_buf, output_buf) != 0){};
+		  } else {
+			  sprintf(output_buf, "\nERROR");
+			  while(output_buf_send_str(&project_output_buf, output_buf) != 0){};
+		  }
+	  }
+	   HAL_Delay(10);
+
+    /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
+  }
+  /* USER CODE END 3 */
+}
+
+/**
+  * @brief System Clock Configuration
+  * @retval None
+  */
+void SystemClock_Config(void)
+{
+  RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
+  */
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
+  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+  RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
+  /** Initializes the CPU, AHB and APB buses clocks
+  */
+  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+}
+
+/**
+  * @brief USART1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART1_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART1_Init 0 */
+
+  /* USER CODE END USART1_Init 0 */
+
+  /* USER CODE BEGIN USART1_Init 1 */
+
+  /* USER CODE END USART1_Init 1 */
+  huart1.Instance = USART1;
+  huart1.Init.BaudRate = 115200;
+  huart1.Init.WordLength = UART_WORDLENGTH_8B;
+  huart1.Init.StopBits = UART_STOPBITS_1;
+  huart1.Init.Parity = UART_PARITY_NONE;
+  huart1.Init.Mode = UART_MODE_TX_RX;
+  huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart1.Init.OverSampling = UART_OVERSAMPLING_16;
+  if (HAL_UART_Init(&huart1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART1_Init 2 */
+
+  /* USER CODE END USART1_Init 2 */
+
+}
+
+/**
+  * @brief GPIO Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_GPIO_Init(void)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  /* USER CODE BEGIN MX_GPIO_Init_1 */
+
+  /* USER CODE END MX_GPIO_Init_1 */
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
+
+
+
+  /*Configure GPIO pin : PA0 */
+  GPIO_InitStruct.Pin = GPIO_PIN_0;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : PB2 */
+  GPIO_InitStruct.Pin = GPIO_PIN_2;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, GPIO_PIN_RESET);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI0_IRQn, 1, 0);
+  HAL_NVIC_EnableIRQ(EXTI0_IRQn);
+
+  /* USER CODE BEGIN MX_GPIO_Init_2 */
+
+  /* USER CODE END MX_GPIO_Init_2 */
+}
+
+/* USER CODE BEGIN 4 */
+
+/* USER CODE END 4 */
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @retval None
+  */
+void Error_Handler(void)
+{
+  /* USER CODE BEGIN Error_Handler_Debug */
+  /* User can add his own implementation to report the HAL error return state */
+  __disable_irq();
+  while (1)
+  {
+  }
+  /* USER CODE END Error_Handler_Debug */
+}
+#ifdef USE_FULL_ASSERT
+/**
+  * @brief  Reports the name of the source file and the source line number
+  *         where the assert_param error has occurred.
+  * @param  file: pointer to the source file name
+  * @param  line: assert_param error line source number
+  * @retval None
+  */
+void assert_failed(uint8_t *file, uint32_t line)
+{
+  /* USER CODE BEGIN 6 */
+  /* User can add his own implementation to report the file name and line number,
+     ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+  /* USER CODE END 6 */
+}
+#endif /* USE_FULL_ASSERT */

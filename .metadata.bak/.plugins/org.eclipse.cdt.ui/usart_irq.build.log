@@ -1,0 +1,10 @@
+14:47:52 **** Incremental Build of configuration Debug for project usart_irq ****
+make -j28 all 
+arm-none-eabi-size  usart_irq.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1252	      0	   1576	   2828	    b0c	usart_irq.elf
+Finished building: default.size.stdout
+ 
+
+14:47:52 Build Finished. 0 errors, 0 warnings. (took 77ms)
+

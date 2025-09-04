@@ -1,0 +1,12 @@
+20:01:52 **** Incremental Build of configuration Debug for project test_empty ****
+make -j28 all 
+arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
+../Src/main.c:19:10: fatal error: stm32f1xx.h: No such file or directory
+   19 | #include <stm32f1xx.h>
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make: *** [Src/subdir.mk:25: Src/main.o] Error 1
+"make -j28 all" terminated with exit code 2. Build might be incomplete.
+
+20:01:52 Build Failed. 2 errors, 0 warnings. (took 139ms)
+

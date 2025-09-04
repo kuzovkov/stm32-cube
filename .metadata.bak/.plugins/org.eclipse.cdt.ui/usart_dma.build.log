@@ -1,0 +1,10 @@
+14:47:52 **** Incremental Build of configuration Debug for project usart_dma ****
+make -j28 all 
+arm-none-eabi-size  usart_dma.elf 
+   text	   data	    bss	    dec	    hex	filename
+   1676	      0	   1640	   3316	    cf4	usart_dma.elf
+Finished building: default.size.stdout
+ 
+
+14:47:52 Build Finished. 0 errors, 0 warnings. (took 75ms)
+

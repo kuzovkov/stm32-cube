@@ -1,0 +1,10 @@
+14:47:52 **** Incremental Build of configuration Debug for project uart_send_irq ****
+make -j28 all 
+arm-none-eabi-size  uart_send_irq.elf 
+   text	   data	    bss	    dec	    hex	filename
+  10980	     92	  16964	  28036	   6d84	uart_send_irq.elf
+Finished building: default.size.stdout
+ 
+
+14:47:52 Build Finished. 0 errors, 0 warnings. (took 79ms)
+

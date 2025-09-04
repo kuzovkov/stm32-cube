@@ -1,0 +1,10 @@
+14:47:52 **** Incremental Build of configuration Debug for project uart_send_block ****
+make -j28 all 
+arm-none-eabi-size  uart_send_block.elf 
+   text	   data	    bss	    dec	    hex	filename
+   8768	     12	  16492	  25272	   62b8	uart_send_block.elf
+Finished building: default.size.stdout
+ 
+
+14:47:52 Build Finished. 0 errors, 0 warnings. (took 77ms)
+
