@@ -225,7 +225,7 @@ void ADC1_2_IRQHandler(void)
   /* USER CODE END ADC1_2_IRQn 0 */
   HAL_ADC_IRQHandler(&hadc1);
   /* USER CODE BEGIN ADC1_2_IRQn 1 */
-	HAL_ADC_Stop_IT(&hadc1);
+	//HAL_ADC_Stop_IT(&hadc1);
   /* USER CODE END ADC1_2_IRQn 1 */
 }
 
@@ -235,7 +235,7 @@ void ADC1_2_IRQHandler(void)
 void TIM1_UP_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM1_UP_IRQn 0 */
-  mytick();
+  run_adc();
   /* USER CODE END TIM1_UP_IRQn 0 */
   HAL_TIM_IRQHandler(&htim1);
   /* USER CODE BEGIN TIM1_UP_IRQn 1 */

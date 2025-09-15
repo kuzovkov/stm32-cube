@@ -28,6 +28,8 @@
 
 #include "st7789.h"
 #include "fonts.h"
+
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -76,38 +78,48 @@ static void MX_TIM1_Init(void);
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
-	char msg[128];
+	char msg_uart[128];
+	char msg_display[128];
 	uint16_t rawValue;
 	float temp;
 	float mV;
 
 	rawValue = HAL_ADC_GetValue(&hadc1);
 	mV = ((float)rawValue) / 4095 * 3300;
-	temp = ((mV - 760.0) / 2.5) + 25;
+	//Temperature (in °C) = {(V 25 - V SENSE ) / Avg_Slope} + 25.
+	//Avg_Slope(1) Average slope 4.0 4.3 4.6 mV/°C
+	//V25(1) Voltage at 25 °C 1.34 1.43 1.52 V
+	//https://www.st.com/resource/en/datasheet/stm32f103c8.pdf
 
-	sprintf(msg, "rawValue: %hu\r\n", rawValue);
-	HAL_UART_Transmit(&huart1, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
-	ST7789_WriteString(10, 10, msg, Font_11x18, GBLUE, BLACK);
-	sprintf(msg, "mV: %f.4\r\n", mV);
-	HAL_UART_Transmit(&huart1, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
-	ST7789_WriteString(10, 25, msg, Font_11x18, RED, BLACK);
-	sprintf(msg, "Temperature: %f.2\r\n", temp);
-	HAL_UART_Transmit(&huart1, (uint8_t*) msg, strlen(msg), HAL_MAX_DELAY);
-	ST7789_WriteString(10, 40, msg, Font_11x18, YELLOW, BLACK);
+	temp = ((1460 - mV) / 4.3) + 25;
+
+	sprintf(msg_uart, "rawValue: %hu\r\n", rawValue);
+	sprintf(msg_display, "%d", rawValue);
+	HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
+	ST7789_WriteString(20, 10, msg_display, Font_16x26, GBLUE, BLACK);
+	sprintf(msg_uart, "mV: %f\r\n", mV);
+	sprintf(msg_display, "U: %.4f V", mV/1000.0);
+	HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
+	ST7789_WriteString(20, 40, msg_display, Font_16x26, RED, BLACK);
+	sprintf(msg_uart, "Temperature: %.2f\r\n", temp);
+	sprintf(msg_display, "t: %.2f C", temp);
+	HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
+	ST7789_WriteString(20, 60, msg_display, Font_16x26, YELLOW, BLACK);
 
 }
 
-void mytick()
+void run_adc()
 {
 	static uint16_t count = 0;
 	count++;
 	if ((count % 5) == 0){
-		char* text = "mytick\r\n";
+		char* text = "run_adc\r\n";
 		HAL_UART_Transmit(&huart1, (uint8_t*) text, strlen(text), HAL_MAX_DELAY);
 		HAL_ADC_Start_IT(&hadc1);
 	}
 
 }
+
 
 /* USER CODE END 0 */
 
@@ -142,6 +154,9 @@ int main(void)
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_ADC1_Init();
+  if (HAL_ADCEx_Calibration_Start(&hadc1) != HAL_OK){
+      Error_Handler();
+  }
   MX_USART1_UART_Init();
   MX_SPI1_Init();
   MX_TIM1_Init();
@@ -239,7 +254,7 @@ static void MX_ADC1_Init(void)
   */
   hadc1.Instance = ADC1;
   hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
-  hadc1.Init.ContinuousConvMode = ENABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
