@@ -122,19 +122,36 @@ static void MX_TIM1_Init(void);
 static void MX_USART1_UART_Init(void);
 /* USER CODE BEGIN PFP */
 
+
+
+
+void run_adc(void);
+void read_adc_value_and_send(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 {
+	read_adc_value_and_send();
+	HAL_ADC_Stop_DMA(hadc);
+}
 
+void run_adc(void)
+{
+	static uint16_t count = 0;
+	count++;
+	if ((count % 5) == 0){
+		HAL_ADC_Start_DMA(&hadc1, (uint32_t*)rawValues, 3);
+	}
+}
+
+void read_adc_value_and_send(void)
+{
 	char msg_uart[128];
 	char msg_display[128];
 	float temp;
 	float mV;
-
-	convCompleted = 1;
 
 	for(uint8_t i = 0; i < hadc1.Init.NbrOfConversion; i++) {
 		mV = ((float)rawValues[i]) / 4095 * 3300;
@@ -148,26 +165,25 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
 		sprintf(msg_uart, "rawValue: %hu\r\n", rawValues[i]);
 		sprintf(msg_display, "%d", rawValues[i]);
 		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-		ST7789_WriteString(20, 10, msg_display, Font_16x26, GBLUE, BLACK);
+		ST7789_WriteString(20, 10 + i*70, msg_display, Font_16x26, GBLUE, BLACK);
 		sprintf(msg_uart, "mV: %f\r\n", mV);
 		sprintf(msg_display, "U: %.4f V", mV/1000.0);
 		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-		ST7789_WriteString(20, 40, msg_display, Font_16x26, RED, BLACK);
-		sprintf(msg_uart, "Temperature: %.2f\r\n", temp);
-		sprintf(msg_display, "t: %.2f C", temp);
-		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-		ST7789_WriteString(20, 60, msg_display, Font_16x26, YELLOW, BLACK);
+		ST7789_WriteString(20, 40 + i*70, msg_display, Font_16x26, RED, BLACK);
+		if (i == 0){
+			sprintf(msg_uart, "Temperature: %.2f\r\n", temp);
+			sprintf(msg_display, "t: %.2f C", temp);
+			HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
+			ST7789_WriteString(20, 60 + i*70, msg_display, Font_16x26, YELLOW, BLACK);
+		}
+		HAL_UART_Transmit(&huart1, (uint8_t*) "--", strlen("--"), HAL_MAX_DELAY);
+
 	}
-	HAL_ADC_Stop_DMA(&hadc1);
 }
 
-void run_adc(void)
+void HAL_ADC_ErrorCallback(ADC_HandleTypeDef *hadc)
 {
-	static uint16_t count = 0;
-	count++;
-	if ((count % 5) == 0){
-		HAL_ADC_Start_DMA(&hadc1, (uint32_t*)rawValues, 3);
-	}
+	HAL_ADC_Start_DMA(&hadc1, (uint32_t*)rawValues, 3);
 }
 /* USER CODE END 0 */
 
@@ -179,11 +195,6 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
-	char msg_uart[128];
-	char msg_display[128];
-	float temp;
-	float mV;
-
 
   /* USER CODE END 1 */
 
@@ -211,8 +222,9 @@ int main(void)
   MX_TIM1_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-	ST7789_Init();
-	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+
+  ST7789_Init();
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -220,32 +232,7 @@ int main(void)
 
 	HAL_TIM_Base_Start_IT(&htim1);
 	ST7789_Fill_Color(BLACK);
-	//HAL_ADC_Start_DMA(&hadc1, (uint32_t*)rawValues, 3);
-	//while(!convCompleted);
-	//HAL_ADC_Stop_DMA(&hadc1);
 
-//	for(uint8_t i = 0; i < hadc1.Init.NbrOfConversion; i++) {
-//		mV = ((float)rawValues[i]) / 4095 * 3300;
-//		//Temperature (in °C) = {(V 25 - V SENSE ) / Avg_Slope} + 25.
-//		//Avg_Slope(1) Average slope 4.0 4.3 4.6 mV/°C
-//		//V25(1) Voltage at 25 °C 1.34 1.43 1.52 V
-//		//https://www.st.com/resource/en/datasheet/stm32f103c8.pdf
-//
-//		temp = ((1460 - mV) / 4.3) + 25;
-//
-//		sprintf(msg_uart, "rawValue: %hu\r\n", rawValues[i]);
-//		sprintf(msg_display, "%d", rawValues[i]);
-//		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-//		ST7789_WriteString(20, 10, msg_display, Font_16x26, GBLUE, BLACK);
-//		sprintf(msg_uart, "mV: %f\r\n", mV);
-//		sprintf(msg_display, "U: %.4f V", mV/1000.0);
-//		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-//		ST7789_WriteString(20, 40, msg_display, Font_16x26, RED, BLACK);
-//		sprintf(msg_uart, "Temperature: %.2f\r\n", temp);
-//		sprintf(msg_display, "t: %.2f C", temp);
-//		HAL_UART_Transmit(&huart1, (uint8_t*) msg_uart, strlen(msg_uart), HAL_MAX_DELAY);
-//		ST7789_WriteString(20, 60, msg_display, Font_16x26, YELLOW, BLACK);
-//	}
 	while (1)
 	{
 
@@ -330,8 +317,6 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
   hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
   hadc1.Init.NbrOfConversion = 3;
-  hdma_adc1.Init.Mode = DMA_CIRCULAR;
-
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
   {
     Error_Handler();
@@ -349,6 +334,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
+  sConfig.Channel = ADC_CHANNEL_VREFINT;
   sConfig.Rank = ADC_REGULAR_RANK_2;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
@@ -357,6 +343,7 @@ static void MX_ADC1_Init(void)
 
   /** Configure Regular Channel
   */
+  sConfig.Channel = ADC_CHANNEL_4;
   sConfig.Rank = ADC_REGULAR_RANK_3;
   if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
   {
