@@ -75,6 +75,10 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <stdbool.h>
+
+#include "st7789.h"
+#include "fonts.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -113,7 +117,6 @@ static void MX_DMA_Init(void);
 static void MX_SPI1_Init(void);
 static void MX_SPI2_Init(void);
 static void MX_USART1_UART_Init(void);
-
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -206,6 +209,7 @@ PeakData peaks = {0};
 
 void process_sample_and_detect(int16_t rx, int16_t ry, int16_t rz) {
 	char message[255];
+	char message_display[128];
 	// Преобразование raw -> g -> m/s^2
     float gx = (float)rx * ADXL_SCALE_G;
     float gy = (float)ry * ADXL_SCALE_G;
@@ -228,6 +232,10 @@ void process_sample_and_detect(int16_t rx, int16_t ry, int16_t rz) {
 
         sprintf(message, "! IMPACT detected at tick %lu: g=%.2fg m/s2=%.2fg\n",
                (unsigned long)now, abs_g, a_ms2);
+        sprintf(message_display, "%.2f g", abs_g);
+        ST7789_WriteString(20, 80, message_display, Font_16x26, GRED, BLACK);
+        sprintf(message_display, "%.2fg m/s2", a_ms2);
+		ST7789_WriteString(20, 120, message_display, Font_16x26, GREEN, BLACK);
         HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
     }
 
@@ -276,11 +284,16 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   ADXL345_Init();
+  //init display
+  ST7789_Init();
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
+  ST7789_Fill_Color(BLACK);
 
   // Быстрый тест: прочитать ID
   uint8_t id = ADXL345_ReadID();
-  sprintf(message, "ADXL345 ID = 0x%02X\r\n", id);
+  sprintf(message, "ADXL345 ID = 0x%02X", id);
   HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
+  ST7789_WriteString(20, 20, message, Font_11x18, GBLUE, BLACK);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -362,7 +375,7 @@ static void MX_SPI1_Init(void)
   hspi1.Init.CLKPolarity = SPI_POLARITY_HIGH;
   hspi1.Init.CLKPhase = SPI_PHASE_2EDGE;
   hspi1.Init.NSS = SPI_NSS_SOFT;
-  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_4;
+  hspi1.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
   hspi1.Init.FirstBit = SPI_FIRSTBIT_MSB;
   hspi1.Init.TIMode = SPI_TIMODE_DISABLE;
   hspi1.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -488,7 +501,17 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_12, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : PA1 PA2 PA3 */
+  GPIO_InitStruct.Pin = GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PB12 */
   GPIO_InitStruct.Pin = GPIO_PIN_12;
