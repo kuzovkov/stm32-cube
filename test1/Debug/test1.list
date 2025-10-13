@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0000300c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000029c2  00000000  00000000  00003035  2**0
+ 12 .debug_info   000029c9  00000000  00000000  00003035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000e63  00000000  00000000  000059f7  2**0
+ 13 .debug_abbrev 00000e63  00000000  00000000  000059fe  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000003d8  00000000  00000000  00006860  2**3
+ 14 .debug_aranges 000003d8  00000000  00000000  00006868  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000002c0  00000000  00000000  00006c38  2**0
+ 15 .debug_rnglists 000002c0  00000000  00000000  00006c40  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00015958  00000000  00000000  00006ef8  2**0
+ 16 .debug_macro  0001639b  00000000  00000000  00006f00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0000445a  00000000  00000000  0001c850  2**0
+ 17 .debug_line   0000459d  00000000  00000000  0001d29b  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    0007bcc3  00000000  00000000  00020caa  2**0
+ 18 .debug_str    0007f435  00000000  00000000  00021838  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  0009c96d  2**0
+ 19 .comment      00000043  00000000  00000000  000a0c6d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d50  00000000  00000000  0009c9b0  2**2
+ 20 .debug_frame  00000d50  00000000  00000000  000a0cb0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 0000005e  00000000  00000000  0009d700  2**0
+ 21 .debug_line_str 0000005e  00000000  00000000  000a1a00  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -137,6 +137,7 @@ int main(void)
  80001a0:	af00      	add	r7, sp, #0
 
   /* USER CODE BEGIN 1 */
+	//initialise_monitor_handles();
 	uint32_t delay = 500;
  80001a2:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
  80001a6:	60bb      	str	r3, [r7, #8]
@@ -233,6 +234,7 @@ int main(void)
 	HAL_Delay(delay);
  8000224:	68b8      	ldr	r0, [r7, #8]
  8000226:	f000 f9c3 	bl	80005b0 <HAL_Delay>
+	//printf("buttonState=%d\r\n", buttonState);
 	cnt++;
  800022a:	4b06      	ldr	r3, [pc, #24]	@ (8000244 <main+0xa8>)
  800022c:	781b      	ldrb	r3, [r3, #0]

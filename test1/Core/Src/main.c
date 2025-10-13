@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+//extern void initialise_monitor_handles(void);
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -72,6 +72,7 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	//initialise_monitor_handles();
 	uint32_t delay = 500;
 	uint8_t buttonState = 0;
 	GPIO_PinState pinState;
@@ -101,6 +102,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  //printf("Semihosting is working!\r\n");
   while (1)
   {
     /* USER CODE END WHILE */
@@ -124,6 +126,7 @@ int main(void)
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 	HAL_Delay(delay);
+	//printf("buttonState=%d\r\n", buttonState);
 	cnt++;
 
   }
