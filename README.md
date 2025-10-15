@@ -167,7 +167,10 @@ Startup:
   Reset and Delay
   Halt
   
-  Load Image and Symbols: Use file ${workspace_loc:/test1/Debug/test1.elf} 
+  Load Image and Symbols: Use file ${workspace_loc:/test1/Debug/test1.elf}
+  
+  Set breakpoint at: main (если нужно) 
+  
   
 Настраиваем запуск сервера Open OCD (внешнего) из IDE
 Run -> External Tools -> External Tools Configuration -> Под Program создаем новый конфиг, например External-Open-OCD
@@ -232,6 +235,45 @@ xPSR: 0x01000000 pc: 0x08000608 msp: 0x20005000, semihosting
 И появятся кнопки для управления отладкой и вкладка Debug рядом с Project Explorer
 
 
+Подключение библиотеки Ливиу Ионеску (https://codeload.github.com/eclipse-embed-cdt/eclipse-plugins/zip/refs/tags/v4.7.2-202001271244)
+для использования вывода сообщений в отладочную консоль CubeIDE.
+----------------------------------------------------------------------------------------------------------------------------------------
+Добавляем папку diag в папку Src проекта
+В этой папке файлы semihosting.h, Trace.h, Trace.c. trace_impl.c, взятые из скачанной по ссылке выше библиотеки.
+В trace_impl.c закомменчена строка //#include "cmsis_device.h" за ненадобностью в CubeIDE
+В trace_impl.c исправлен путь до semihosting.h :  #include "arm/semihosting.h" -> #include "semihosting.h"
+
+В main.c подключаем 
+#include "diag/Trace.h"
+Добавляем также 
+extern void initialise_monitor_handles(void); <-- добавляем
+
+int main(void)
+{
+
+  /* USER CODE BEGIN 1 */
+	initialise_monitor_handles(); <-- добавляем
+	...
+
+ trace_printf("Semihosting is working!\n\r");  <-- можем использовать, \n обязательно!!!
+ 
+}
+
+Нужно задать макросы в настройках компилятора (чтобы применились ко всем исходникам).
+    ПКМ на проект → Properties
+    C/C++ Build → Settings → Tool Settings → MCU GCC Compiler → Preprocessor
+    В поле "Defined symbols (-D)" добавляем:
+
+TRACE
+OS_USE_TRACE_SEMIHOSTING_DEBUG
+
+Жмем Apply and Close, пересобираем проект.
+
+Теперь при отладке через Open OCD сервер, в консоли будут отображаться сообщения, выводимые через trace_printf()
+Функция принимает строку форматирования и параметры аналогично printf()
+
+!!!Важно. При отладке не через Open OCD программа будет зависать на trace_printf(), для того чтобы вернуть
+возможность запускать без сеанса отладки с Open OCD нужно в настройках проекта убрать определение TRACE
 
 
    

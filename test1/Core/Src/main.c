@@ -21,7 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
 #include <stdio.h>
+#include "diag/Trace.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -102,7 +104,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  printf("Semihosting is working!\n\r");
+  trace_printf("Semihosting is working!\n\r");
   while (1)
   {
     /* USER CODE END WHILE */
@@ -126,7 +128,7 @@ int main(void)
 	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_13, GPIO_PIN_RESET);
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 	HAL_Delay(delay);
-	printf("buttonState=%d\n\r", buttonState);
+	trace_printf("buttonState=%d\n\r", buttonState);
 	cnt++;
 
   }
