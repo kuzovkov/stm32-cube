@@ -79,6 +79,7 @@
 
 #include "st7789.h"
 #include "fonts.h"
+#include "diag/Trace.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,7 +94,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+extern void initialise_monitor_handles(void);
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -195,8 +196,9 @@ void ADXL_TestLoop(void)
         uint8_t int_map    = ADXL_ReadReg(0x2F);
         uint8_t int_src    = ADXL_ReadReg(0x30);
 
-        sprintf(message, "INT_ENABLE=0x%02X, INT_MAP=0x%02X, INT_SOURCE=0x%02X", int_enable, int_map, int_src);
-        HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
+        //sprintf(message, "INT_ENABLE=0x%02X, INT_MAP=0x%02X, INT_SOURCE=0x%02X", int_enable, int_map, int_src);
+        //HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
+        trace_printf("INT_ENABLE=0x%02X, INT_MAP=0x%02X, INT_SOURCE=0x%02X\n", int_enable, int_map, int_src);
         HAL_Delay(500);
     }
 }
@@ -374,7 +376,9 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+  initialise_monitor_handles();
   char message[255];
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -410,11 +414,12 @@ int main(void)
 
   // Быстрый тест: прочитать ID
   uint8_t id = ADXL345_ReadID();
-  sprintf(message, "ADXL345 ID = 0x%02X", id);
-  HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
-  ST7789_WriteString(20, 20, message, Font_11x18, GBLUE, BLACK);
+  //sprintf(message, "ADXL345 ID = 0x%02X", id);
+  //HAL_UART_Transmit(&huart1, message, strlen(message), HAL_MAX_DELAY);
+  //ST7789_WriteString(20, 20, message, Font_11x18, GBLUE, BLACK);
+  trace_printf("ADXL345 ID = 0x%02X\n", id);
 
-  //ADXL_TestLoop();
+  ADXL_TestLoop();
   /* USER CODE END 2 */
 
   /* Infinite loop */

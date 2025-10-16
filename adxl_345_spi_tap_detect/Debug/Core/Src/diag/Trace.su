@@ -1,0 +1,4 @@
+../Core/Src/diag/Trace.c:44:1:trace_printf	16	static
+../Core/Src/diag/Trace.c:68:1:trace_puts	16	static
+../Core/Src/diag/Trace.c:75:1:trace_putchar	16	static
+../Core/Src/diag/Trace.c:82:1:trace_dump_args	24	static
