@@ -78,6 +78,7 @@ int main(void)
 	uint32_t delay = 500;
 	uint8_t buttonState = 0;
 	GPIO_PinState pinState;
+	char msg[] = "Hello STM32 lovers!\n";
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -105,6 +106,15 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   trace_printf("Semihosting is working!\n\r");
+  asm volatile (
+   " mov r0, 0x4 \n"
+   " mov r1, %[msg] \n"
+   " bkpt #0xAB"
+   :
+   : [msg] "r" (msg)
+   : "r0", "r1"
+
+  );
   while (1)
   {
     /* USER CODE END WHILE */
